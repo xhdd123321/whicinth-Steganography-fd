@@ -1,32 +1,18 @@
-export interface IEncodeImageParams {
-  carrierFile: File
-  dataFile: File
-}
-
-export interface IDecodeImageParams {
-  carrierFile: File
-}
-
-export interface IEncodeDocParams {
-  carrierFile: File
-  data_doc: string
-}
-
-export interface IDecodeDocParams {
-  carrierFile: File
-}
+import { ResType } from '@/service/http'
 
 export interface IEncodeImageRespData {
   carrier_file: string
   data_file: string
   result_file: string
   url: string
+  err_msg?: string
 }
 
 export interface IDecodeImageRespData {
   carrier_file: string
   result_file: string
   url: string
+  err_msg?: string
 }
 
 export interface IEncodeDocRespData {
@@ -34,16 +20,27 @@ export interface IEncodeDocRespData {
   data_doc: string
   result_file: string
   url: string
+  err_msg?: string
 }
 
 export interface IDecodeDocRespData {
   carrier_file: string
   result_doc: string
+  err_msg?: string
+}
+
+export interface IDecodeIntelligentRespData {
+  carrier_file: string
+  result_doc?: string
+  result_file?: string
+  url?: string
+  err_msg?: string
 }
 
 export interface IStegApi {
-  encodeImage: (params: IEncodeImageParams) => Promise<any>
-  decodeImage: (params: IDecodeImageParams) => Promise<any>
-  encodeDoc: (params: IEncodeDocParams) => Promise<any>
-  decodeDoc: (params: IDecodeDocParams) => Promise<any>
+  encodeImage: (params: FormData) => Promise<ResType<IEncodeImageRespData>>
+  decodeImage: (params: FormData) => Promise<ResType<IDecodeImageRespData>>
+  encodeDoc: (params: FormData) => Promise<ResType<IEncodeDocRespData>>
+  decodeDoc: (params: FormData) => Promise<ResType<IDecodeDocRespData>>
+  decodeIntelligent: (params: FormData) => Promise<ResType<IDecodeIntelligentRespData>>
 }

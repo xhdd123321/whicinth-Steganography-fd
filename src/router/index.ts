@@ -1,12 +1,8 @@
 import { createRouter, createWebHistory, Router, RouteRecordRaw } from 'vue-router'
+import steg from '@/router/modules/steg'
+import other from '@/router/modules/other'
 
-const routes: RouteRecordRaw[] = [
-  {
-    path: '/',
-    name: 'Home',
-    component: () => import('@/pages/index.vue'), // 注意这里要带上 文件后缀.vue
-  },
-]
+const routes: RouteRecordRaw[] = [{ path: '/', redirect: 'steg' }, steg, other]
 
 const router: Router = createRouter({
   history: createWebHistory(), // createWebHashHistory()
@@ -26,8 +22,10 @@ const router: Router = createRouter({
   },
 })
 
-router.beforeEach((to, from, next) => {})
+// router.beforeEach((to, from, next) => {
+//   next()
+// })
 
-router.afterEach((to, from) => {})
+// router.afterEach((to, from) => {})
 
 export default router

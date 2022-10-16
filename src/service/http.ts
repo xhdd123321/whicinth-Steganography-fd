@@ -48,7 +48,7 @@ instance.interceptors.response.use((res) => {
   return res
 })
 
-interface ResType<T> {
+export interface ResType<T> {
   code: number
   data?: T
   message: string
