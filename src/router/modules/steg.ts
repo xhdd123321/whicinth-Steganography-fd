@@ -100,5 +100,13 @@ export default {
         title: '漂流信',
       },
     },
+    {
+      path: 'monitor',
+      name: 'monitor',
+      component: () => import('@/pages/steg/monitor/index.vue'),
+      meta: {
+        title: '监控',
+      },
+    },
   ],
 }

@@ -1,4 +1,4 @@
-import { IEncodeImageRespData, IStegApi } from './steg_types'
+import { IStegApi } from './steg_types'
 import http from '@/service/http'
 
 const stegApi: IStegApi = {

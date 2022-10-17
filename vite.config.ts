@@ -40,12 +40,7 @@ export default defineConfig({
   },
   // 生产环境打包配置
   // 去除 console debugger
-  build: {
-    terserOptions: {
-      compress: {
-        drop_console: true,
-        drop_debugger: true,
-      },
-    },
+  esbuild: {
+    drop: ['console', 'debugger'],
   },
 })
