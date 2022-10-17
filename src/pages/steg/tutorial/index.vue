@@ -1,7 +1,15 @@
 <script setup lang="ts">
-import {ref} from "vue";
+import {onMounted, ref} from "vue";
 import { IconStar } from '@arco-design/web-vue/es/icon'
 const size = ref('large');
+const windowsWidth = ref(0)
+onMounted(() => {
+  getWindowResize()
+  window.addEventListener('resize', getWindowResize)
+})
+const getWindowResize = () => {
+  windowsWidth.value = window.innerWidth
+}
 const introData = [{
   value: '\tHello, 这里是 “风信” , 英文名 “whicinth” , 这里基于图片隐写算法，提供了一种有趣的信息加密方式，你既可以用这种方式加密存储自己的重要信息，也可以用这种特别的方式与朋友完成信息交换，' +
       '又或者你对网络安全很感兴趣，也可以用本站点练习下CTF里的图片隐写，站点的前后端代码都开源在github仓库（虽然代码写的很烂)，感兴趣的同学可以一起交流学习~',
@@ -42,6 +50,16 @@ const qaData = [{
         :show-back="false"
     >
     </a-page-header>
+    <a-avatar-group style="margin-bottom: 3vh" :size="20 + windowsWidth/40">
+      <a-avatar :style="{ backgroundColor: 'rgb(var(--arcoblue-3))' }">W</a-avatar>
+      <a-avatar :style="{ backgroundColor: 'rgb(var(--arcoblue-4))' }">H</a-avatar>
+      <a-avatar :style="{ backgroundColor: 'rgb(var(--arcoblue-5))' }">I</a-avatar>
+      <a-avatar :style="{ backgroundColor: 'rgb(var(--arcoblue-6))' }">C</a-avatar>
+      <a-avatar :style="{ backgroundColor: 'rgb(var(--arcoblue-6))' }">I</a-avatar>
+      <a-avatar :style="{ backgroundColor: 'rgb(var(--arcoblue-5))' }">N</a-avatar>
+      <a-avatar :style="{ backgroundColor: 'rgb(var(--arcoblue-4))' }">T</a-avatar>
+      <a-avatar :style="{ backgroundColor: 'rgb(var(--arcoblue-3))' }">H</a-avatar>
+    </a-avatar-group>
     <a-card>
       <div class="content-container">
         <a-divider :margin="10"><icon-star /></a-divider>

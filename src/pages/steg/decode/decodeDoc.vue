@@ -7,7 +7,7 @@ const router = useRouter()
 const formData = ref(new FormData())
 const goReady = ref(false)
 const loading = ref(false)
-const resultDoc = ref('Here is the result text')
+const resultDoc = ref('')
 const checkGoReady = () => {
   goReady.value = formData.value.has('carrier_file')
   return goReady.value
@@ -95,8 +95,11 @@ const reset = () => {
       <template #title>
         <span>step3: 查看并保存结果</span>
       </template>
-        <span style="white-space: pre-wrap">
-          {{resultDoc}}
+        <a-empty v-if="resultDoc === ''"/>
+        <span v-else style="white-space: pre-wrap">
+          <a-typography-paragraph copyable>
+            {{resultDoc}}
+          </a-typography-paragraph>
         </span>
     </a-card>
   </div>

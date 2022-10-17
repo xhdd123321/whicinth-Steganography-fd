@@ -8,7 +8,7 @@ import CustomHeader from "@/components/CustomHeader.vue";
     <a-layout>
       <a-layout-header><CustomHeader /></a-layout-header>
       <a-layout-content><router-view /></a-layout-content>
-      <a-layout-footer class="footer">Powered by zhu-an</a-layout-footer>
+      <a-layout-footer class="footer">Powered by<a-link href="https://www.zhu-an.cn/">zhu-an</a-link></a-layout-footer>
     </a-layout>
   </div>
 </template>

@@ -107,9 +107,12 @@ const reset = () => {
           class="result-image"
           :src="resultUrl"
       />
-      <span v-if="resultDoc !== ''" style="white-space: pre-wrap">
+      <span v-else-if="resultDoc !== ''" style="white-space: pre-wrap">
+        <a-typography-paragraph copyable>
           {{resultDoc}}
+        </a-typography-paragraph>
       </span>
+      <a-empty v-else/>
     </a-card>
   </div>
 </template>

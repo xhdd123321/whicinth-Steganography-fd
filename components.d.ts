@@ -7,11 +7,14 @@ export {}
 
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
+    AAvatar: typeof import('@arco-design/web-vue')['Avatar']
+    AAvatarGroup: typeof import('@arco-design/web-vue')['AvatarGroup']
     AButton: typeof import('@arco-design/web-vue')['Button']
     ACard: typeof import('@arco-design/web-vue')['Card']
     AConfigProvider: typeof import('@arco-design/web-vue')['ConfigProvider']
     ADescriptions: typeof import('@arco-design/web-vue')['Descriptions']
     ADivider: typeof import('@arco-design/web-vue')['Divider']
+    AEmpty: typeof import('@arco-design/web-vue')['Empty']
     AImage: typeof import('@arco-design/web-vue')['Image']
     ALayout: typeof import('@arco-design/web-vue')['Layout']
     ALayoutContent: typeof import('@arco-design/web-vue')['LayoutContent']
@@ -28,6 +31,7 @@ declare module '@vue/runtime-core' {
     ASpace: typeof import('@arco-design/web-vue')['Space']
     ASubMenu: typeof import('@arco-design/web-vue')['SubMenu']
     ATextarea: typeof import('@arco-design/web-vue')['Textarea']
+    ATypographyParagraph: typeof import('@arco-design/web-vue')['TypographyParagraph']
     AUpload: typeof import('@arco-design/web-vue')['Upload']
     CustomHeader: typeof import('./src/components/CustomHeader.vue')['default']
     ElMenu: typeof import('element-plus/es')['ElMenu']

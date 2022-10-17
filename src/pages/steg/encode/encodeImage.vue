@@ -118,7 +118,9 @@ const reset = () => {
       <template #title>
         <span>step4: 查看并保存结果</span>
       </template>
+      <a-empty v-if="resultUrl === ''"/>
       <a-image
+          v-else
           width="70%"
           class="result-image"
           :src="resultUrl"
