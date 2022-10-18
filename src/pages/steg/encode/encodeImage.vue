@@ -3,20 +3,26 @@ import { useRouter } from 'vue-router'
 import { ref } from 'vue'
 import stegApi from "@/service/api/steg";
 import {ElMessage} from "element-plus";
-const uploadRef = ref()
+import {UploadFileInfo} from "naive-ui";
 const router = useRouter()
 const resultUrl = ref('')
 const formData = ref(new FormData())
 const goReady = ref(false)
 const loading = ref(false)
+const uploadRef = ref()
+const uploadRefOther = ref()
+const isShare = ref(true)
 const checkGoReady = () => {
   goReady.value = formData.value.has('carrier_file') && formData.value.has('data_file')
   return goReady.value
 }
-const beforeCarrierUpload = (file: File) => {
-  formData.value.set('carrier_file', file)
+const beforeCarrierUpload = (data: {
+  file: UploadFileInfo
+  fileList: UploadFileInfo[]
+}) => {
+  formData.value.set('carrier_file', data.file.file as File)
   checkGoReady()
-  return file
+  return true
 }
 const beforeCarrierRemove = () => {
   formData.value.delete('carrier_file')
@@ -28,16 +34,28 @@ const beforeDataRemove = () => {
   checkGoReady()
   return true
 }
-const beforeDataUpload = (file: File) => {
-  formData.value.set('data_file', file)
+const beforeDataUpload = (data: {
+  file: UploadFileInfo
+  fileList: UploadFileInfo[]
+}) => {
+  formData.value.set('data_file', data.file.file as File)
   checkGoReady()
-  return file
+  return true
+}
+const clearResult = () => {
+  goReady.value = false
+  uploadRef.value.clear()
+  formData.value.delete('carrier_file')
+  uploadRefOther.value.clear()
+  formData.value.delete('data_file')
+  resultUrl.value = ''
 }
 const encodeHandle = async () => {
   loading.value = true
   try {
-    const res = await stegApi.encodeImage(formData.value)
+    const res = await stegApi.encodeImage(formData.value, isShare.value)
     if (res.code === 0) {
+      clearResult()
       resultUrl.value = res.data?.url as string
       ElMessage.success("加密成功!")
     } else {
@@ -55,7 +73,7 @@ const encodeHandle = async () => {
   loading.value = false
 }
 const reset = () => {
-  router.go(0)
+  clearResult()
 }
 </script>
 
@@ -79,38 +97,46 @@ const reset = () => {
       <template #title>
         <span>step1: 选择载体图片</span>
       </template>
-      <a-upload
+      <n-upload
           ref="uploadRef"
           class="upload-image"
-          list-type="picture-card"
+          list-type="image-card"
           accept="image/png, image/jpeg"
-          limit="1"
-          :auto-upload="false"
+          max="1"
+          :default-upload="false"
           :show-retry-button="false"
-          image-preview
-          :on-before-upload="beforeCarrierUpload"
-          :on-before-remove="beforeCarrierRemove"
+          @before-upload="beforeCarrierUpload"
+          @remove="beforeCarrierRemove"
       />
     </a-card>
     <a-card class="step">
       <template #title>
         <span>step2: 选择隐藏图片</span>
       </template>
-      <a-upload
+      <n-upload
+          ref="uploadRefOther"
           class="upload-image"
-          list-type="picture-card"
+          list-type="image-card"
           accept="image/png, image/jpeg"
-          limit="1"
-          :auto-upload="false"
+          max="1"
+          :default-upload="false"
           :show-retry-button="false"
-          image-preview
-          :on-before-upload="beforeDataUpload"
-          :on-before-remove="beforeDataRemove"
+          @before-upload="beforeDataUpload"
+          @remove="beforeDataRemove"
       />
     </a-card>
     <a-card class="step">
       <template #title>
         <span>step3: 开始加密</span>
+        <n-divider vertical />
+        <n-switch :round="false" :default-value="isShare" @update:value="updateShare">
+          <template #checked>
+            公开
+          </template>
+          <template #unchecked>
+            私有
+          </template>
+        </n-switch>
       </template>
       <a-button :loading="loading" type="primary" shape="round" @click="encodeHandle" :disabled="!goReady">GO</a-button>
     </a-card>
@@ -134,6 +160,7 @@ const reset = () => {
   padding: 1vh 10vw;
 }
 .upload-image {
+  display: flex;
   justify-content: center
 }
 .step {

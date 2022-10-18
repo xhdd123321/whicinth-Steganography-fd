@@ -3,20 +3,25 @@ import { useRouter } from 'vue-router'
 import { ref } from 'vue'
 import stegApi from "@/service/api/steg";
 import { ElMessage } from "element-plus";
+import {UploadFileInfo} from "naive-ui";
 const router = useRouter()
 const formData = ref(new FormData())
 const goReady = ref(false)
 const loading = ref(false)
 const resultUrl = ref('')
 const resultDoc = ref('')
+const uploadRef = ref()
 const checkGoReady = () => {
   goReady.value = formData.value.has('carrier_file')
   return goReady.value
 }
-const beforeCarrierUpload = (file: File) => {
-  formData.value.set('carrier_file', file)
+const beforeCarrierUpload = (data: {
+  file: UploadFileInfo
+  fileList: UploadFileInfo[]
+}) => {
+  formData.value.set('carrier_file', data.file.file as File)
   checkGoReady()
-  return file
+  return true
 }
 const beforeCarrierRemove = () => {
   formData.value.delete('carrier_file')
@@ -24,15 +29,18 @@ const beforeCarrierRemove = () => {
   return true
 }
 const clearResult = () => {
+  goReady.value = false
+  uploadRef.value.clear()
+  formData.value.delete('carrier_file')
   resultUrl.value = ''
   resultDoc.value = ''
 }
 const decodeHandle = async () => {
-  clearResult()
   loading.value = true
   try {
     const res = await stegApi.decodeIntelligent(formData.value)
     if (res.code === 0) {
+      clearResult()
       if (res.data?.url) {
         resultUrl.value = res.data?.url as string
       } else {
@@ -54,7 +62,7 @@ const decodeHandle = async () => {
   loading.value = false
 }
 const reset = () => {
-  router.go(0)
+  clearResult()
 }
 </script>
 
@@ -79,16 +87,16 @@ const reset = () => {
       <template #title>
         <span>step1: 选择解密图片</span>
       </template>
-      <a-upload
+      <n-upload
+          ref="uploadRef"
           class="upload-image"
-          list-type="picture-card"
+          list-type="image-card"
           accept="image/png, image/jpeg"
-          limit="1"
-          :auto-upload="false"
+          max="1"
+          :default-upload="false"
           :show-retry-button="false"
-          image-preview
-          :on-before-upload="beforeCarrierUpload"
-          :on-before-remove="beforeCarrierRemove"
+          @before-upload="beforeCarrierUpload"
+          @remove="beforeCarrierRemove"
       />
     </a-card>
     <a-card class="step">
@@ -122,6 +130,7 @@ const reset = () => {
   padding: 1vh 10vw;
 }
 .upload-image {
+  display: flex;
   justify-content: center
 }
 .step {

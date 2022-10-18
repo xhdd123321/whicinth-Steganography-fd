@@ -38,9 +38,9 @@ export interface IDecodeIntelligentRespData {
 }
 
 export interface IStegApi {
-  encodeImage: (params: FormData) => Promise<ResType<IEncodeImageRespData>>
+  encodeImage: (params: FormData, isShare: boolean) => Promise<ResType<IEncodeImageRespData>>
   decodeImage: (params: FormData) => Promise<ResType<IDecodeImageRespData>>
-  encodeDoc: (params: FormData) => Promise<ResType<IEncodeDocRespData>>
+  encodeDoc: (params: FormData, isShare: boolean) => Promise<ResType<IEncodeDocRespData>>
   decodeDoc: (params: FormData) => Promise<ResType<IDecodeDocRespData>>
   decodeIntelligent: (params: FormData) => Promise<ResType<IDecodeIntelligentRespData>>
 }

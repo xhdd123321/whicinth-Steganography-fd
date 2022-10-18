@@ -36,6 +36,10 @@ declare module '@vue/runtime-core' {
     ElMenu: typeof import('element-plus/es')['ElMenu']
     ElMenuItem: typeof import('element-plus/es')['ElMenuItem']
     ElSubMenu: typeof import('element-plus/es')['ElSubMenu']
+    NDivider: typeof import('naive-ui')['NDivider']
+    NRadio: typeof import('naive-ui')['NRadio']
+    NSwitch: typeof import('naive-ui')['NSwitch']
+    NUpload: typeof import('naive-ui')['NUpload']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
   }
