@@ -73,7 +73,7 @@ const reset = () => {
         <a-radio-group type="button" default-value="image">
           <a-radio value="image">image</a-radio>
           <a-radio value="doc" @click="router.push({name:'decodeDoc'})">doc</a-radio>
-          <a-radio value="intelligent" @click="router.push({name:'decodeIntelligent'})">intelligent</a-radio>
+          <a-radio value="intelligent" @click="router.push({name:'decodeIntelligent'})">intelij</a-radio>
         </a-radio-group>
       </template>
     </a-page-header>
@@ -115,13 +115,7 @@ const reset = () => {
 </template>
 
 <style scoped>
-.card-content {
-  padding: 1vh 10vw;
-}
-.upload-image {
-  display: flex;
-  justify-content: center
-}
+@import url("@/style/common.css");
 .step {
   margin-bottom: -1px;
 }

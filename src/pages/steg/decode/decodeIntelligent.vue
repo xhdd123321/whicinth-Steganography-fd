@@ -70,7 +70,7 @@ const reset = () => {
   <div class="card-content">
     <a-page-header
         title="Decode"
-        subtitle="intelligent"
+        subtitle="intelij"
         :show-back="false"
     >
       <template #extra>
@@ -79,7 +79,7 @@ const reset = () => {
         <a-radio-group type="button" default-value="intelligent">
           <a-radio value="image" @click="router.push({name:'decodeImage'})">image</a-radio>
           <a-radio value="doc" @click="router.push({name:'decodeDoc'})">doc</a-radio>
-          <a-radio value="intelligent">intelligent</a-radio>
+          <a-radio value="intelligent">intelij</a-radio>
         </a-radio-group>
       </template>
     </a-page-header>
@@ -126,13 +126,7 @@ const reset = () => {
 </template>
 
 <style scoped>
-.card-content {
-  padding: 1vh 10vw;
-}
-.upload-image {
-  display: flex;
-  justify-content: center
-}
+@import url("@/style/common.css");
 .step {
   margin-bottom: -1px;
 }

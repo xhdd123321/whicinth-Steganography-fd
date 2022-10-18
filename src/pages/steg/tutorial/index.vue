@@ -80,9 +80,7 @@ const qaData = [{
 </template>
 
 <style scoped>
-.card-content {
-  padding: 1vh 10vw;
-}
+@import url("@/style/common.css");
 .content-container {
   margin: 3vh 7vw;
 }

@@ -139,13 +139,7 @@ const reset = () => {
 </template>
 
 <style scoped>
-.card-content {
-  padding: 1vh 10vw;
-}
-.upload-image {
-  display: flex;
-  justify-content: center
-}
+@import url("@/style/common.css");
 .step {
   margin-bottom: -1px;
 }

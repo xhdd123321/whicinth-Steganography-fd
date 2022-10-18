@@ -102,7 +102,5 @@ onBeforeUnmount(() => {
 </template>
 
 <style scoped>
-.card-content {
-  padding: 1vh 10vw;
-}
+@import url("@/style/common.css");
 </style>
