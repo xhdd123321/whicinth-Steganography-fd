@@ -4,6 +4,10 @@ import {onBeforeUnmount, ref} from 'vue'
 import stegApi from "@/service/api/steg";
 import {ElMessage} from "element-plus";
 import {UploadFileInfo} from "naive-ui";
+import {useUserStore} from "@/store/userStore";
+const userStore = useUserStore()
+const goCD = ref(((Date.now() - userStore.lastEncodeTime)/1000) / userStore.limitSecond)
+const goCDReady = ref(((Date.now() - userStore.lastEncodeTime)/1000) >= userStore.limitSecond)
 const router = useRouter()
 const resultUrl = ref('')
 const formData = ref(new FormData())
@@ -81,10 +85,6 @@ const reset = () => {
 }
 
 // 全局API冷却时间CD
-import {useUserStore} from "@/store/userStore";
-const userStore = useUserStore()
-const goCD = ref(((Date.now() - userStore.lastEncodeTime)/1000) / userStore.limitSecond)
-const goCDReady = ref(((Date.now() - userStore.lastEncodeTime)/1000) >= userStore.limitSecond)
 const enterGoCD = () => {
   goCDReady.value = false
   userStore.updateLastEncodeTime()
