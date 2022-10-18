@@ -5,6 +5,9 @@ export const useUserStore = defineStore({
   state: () => ({
     username: '游客',
     location: '',
+    lastEncodeTime: Date.now(),
+    lastDecodeTime: Date.now(),
+    limitSecond: 10,
   }),
   getters: {
     hasLocation(state) {
@@ -31,6 +34,13 @@ export const useUserStore = defineStore({
     resetInfo() {
       console.log('reset userInfo !')
       this.$reset()
+    },
+
+    updateLastEncodeTime() {
+      this.lastEncodeTime = Date.now()
+    },
+    updateLastDecodeTime() {
+      this.lastDecodeTime = Date.now()
     },
   },
 })

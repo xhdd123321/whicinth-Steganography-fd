@@ -5,6 +5,7 @@ export default {
   children: [
     {
       path: '',
+      name: 'steg-index',
       redirect: { name: 'tutorial' },
       meta: {
         title: '',
@@ -28,6 +29,7 @@ export default {
       children: [
         {
           path: '',
+          name: 'encode-index',
           redirect: { name: 'encodeImage' },
           meta: {
             title: '',
@@ -61,6 +63,7 @@ export default {
       children: [
         {
           path: '',
+          name: 'decode-index',
           redirect: { name: 'encodeImage' },
           meta: {
             title: '',

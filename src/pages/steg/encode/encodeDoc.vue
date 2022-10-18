@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { useRouter } from 'vue-router'
-import { ref } from 'vue'
+import {onBeforeUnmount, ref} from 'vue'
 import stegApi from "@/service/api/steg";
 import { ElMessage } from "element-plus";
 import {UploadFileInfo} from "naive-ui";
@@ -49,6 +49,7 @@ const encodeHandle = async () => {
     const res = await stegApi.encodeDoc(formData.value, isShare.value)
     if (res.code === 0) {
       clearResult()
+      enterGoCD()
       resultUrl.value = res.data?.url as string
       ElMessage.success("加密成功!")
     } else {
@@ -68,6 +69,29 @@ const encodeHandle = async () => {
 const reset = () => {
   clearResult()
 }
+
+// 全局API冷却时间CD
+import {useUserStore} from "@/store/userStore";
+const userStore = useUserStore()
+const goCD = ref(((Date.now() - userStore.lastEncodeTime)/1000) / userStore.limitSecond)
+const goCDReady = ref(((Date.now() - userStore.lastEncodeTime)/1000) >= userStore.limitSecond)
+const enterGoCD = () => {
+  goCDReady.value = false
+  userStore.updateLastEncodeTime()
+  goCD.value = ((Date.now() - userStore.lastEncodeTime)/1000) / userStore.limitSecond
+}
+const timeGap = 0.1/userStore.limitSecond
+const updateCD = async () => {
+  if (goCD.value > 1) {
+    goCDReady.value = true
+  } else {
+    goCD.value = goCD.value + timeGap
+  }
+}
+const timer = setInterval(updateCD, 100)
+onBeforeUnmount(() => {
+  clearInterval(timer)
+})
 </script>
 
 <template>
@@ -95,7 +119,7 @@ const reset = () => {
           class="upload-image"
           list-type="image-card"
           accept="image/png, image/jpeg"
-          max="1"
+          :max=1
           :default-upload="false"
           :show-retry-button="false"
           @before-upload="beforeCarrierUpload"
@@ -121,7 +145,12 @@ const reset = () => {
           </template>
         </n-switch>
       </template>
-      <a-button :loading="loading" type="primary" shape="round" @click="encodeHandle" :disabled="!goReady">GO</a-button>
+      <a-button v-if="goCDReady" :loading="loading" type="primary" shape="round" @click="encodeHandle" :disabled="!goReady">GO</a-button>
+      <a-progress v-else type="circle" :percent="goCD">
+        <template v-slot:text="scope" >
+          CD
+        </template>
+      </a-progress>
     </a-card>
     <a-card class="step" :loading="loading">
       <template #title>

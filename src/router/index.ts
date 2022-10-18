@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory, Router, RouteRecordRaw } from 'vue-router'
 import steg from '@/router/modules/steg'
 import other from '@/router/modules/other'
+import NProgress from 'nprogress'
 
 const routes: RouteRecordRaw[] = [{ path: '/', redirect: 'steg' }, steg, other]
 
@@ -22,10 +23,13 @@ const router: Router = createRouter({
   },
 })
 
-// router.beforeEach((to, from, next) => {
-//   next()
-// })
+router.beforeEach((to, from, next) => {
+  NProgress.start()
+  next()
+})
 
-// router.afterEach((to, from) => {})
+router.afterEach((to, from) => {
+  NProgress.done()
+})
 
 export default router
