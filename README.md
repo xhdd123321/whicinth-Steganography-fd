@@ -2,11 +2,11 @@
 
 风信——用图片承载无法言说的秘密
 
-* 这里是whicinth前端源码
-* 基于Vue3.0全家桶
-* 配套[后端](https://github.com/xhdd123321/whicinth-Steganography-bd)戳这里
+- 这里是 whicinth 前端源码
+- 基于 Vue3.0 全家桶
+- 配套[后端](https://github.com/xhdd123321/whicinth-Steganography-bd)戳这里
 
-开发文档：[Re：从零搭建Vue3轻量级开发脚手架 | 逐暗的小站 (zhu-an.cn)](https://www.zhu-an.cn/todo/Re：从零搭建Vue3轻量级开发脚手架/)
+开发文档：[Re：从零搭建 Vue3 轻量级开发脚手架 | 逐暗的小站 (zhu-an.cn)](https://www.zhu-an.cn/todo/Re：从零搭建Vue3轻量级开发脚手架/)
 
 # Vue 3 + TypeScript + Vite
 

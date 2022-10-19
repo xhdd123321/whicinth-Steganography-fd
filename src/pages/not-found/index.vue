@@ -10,17 +10,9 @@ const back = () => {
 
 <template>
   <div class="content">
-    <a-result
-        class="result"
-        status="404"
-        :subtitle="'not found'"
-    />
+    <a-result class="result" status="404" :subtitle="'not found'" />
     <div class="operation-row">
-      <a-button
-          key="back"
-          type="primary"
-          @click="back"
-      > back </a-button>
+      <a-button key="back" type="primary" @click="back"> back </a-button>
     </div>
   </div>
 </template>

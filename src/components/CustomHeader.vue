@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import {RouteLocationNormalizedLoaded, useRoute} from 'vue-router'
-import {computed, ComputedRef} from 'vue'
+import { RouteLocationNormalizedLoaded, useRoute } from 'vue-router'
+import { computed, ComputedRef } from 'vue'
 import stegRoute from '@/router/modules/steg'
 
 const route: RouteLocationNormalizedLoaded = useRoute()
@@ -10,38 +10,23 @@ const activeTabName: ComputedRef = computed(() => route.name)
 
 <template>
   <div class="custom-header">
-    <el-menu
-        :default-active="activeTabName"
-        class="el-menu"
-        router
-        mode="horizontal"
-    >
+    <el-menu :default-active="activeTabName" class="el-menu" router mode="horizontal">
       <template v-for="(item, index) in menusList">
-        <el-sub-menu
-            v-if="item.children"
-            :key="item.path"
-            :index="item.name"
-            :route="item"
-        >
+        <el-sub-menu v-if="item.children" :key="item.path" :index="item.name" :route="item">
           <template #title>
             <span>{{ item.meta.title || item.name }}</span>
           </template>
           <el-menu-item
-              v-for="(child, chi) in item.children"
-              v-show="child.component"
-              :key="child.path"
-              :index="child.name"
-              :route="child"
+            v-for="(child, chi) in item.children"
+            v-show="child.component"
+            :key="child.path"
+            :index="child.name"
+            :route="child"
           >
             <span>{{ child.meta.title || child.name }}</span>
           </el-menu-item>
         </el-sub-menu>
-        <el-menu-item
-            v-else
-            :key="item.path"
-            :index="item.name"
-            :route="item"
-        >
+        <el-menu-item v-else :key="item.path" :index="item.name" :route="item">
           <span>{{ item.meta.title || item.name }}</span>
         </el-menu-item>
       </template>
@@ -51,9 +36,8 @@ const activeTabName: ComputedRef = computed(() => route.name)
 
 <style scoped>
 .custom-header {
-
 }
 .el-menu {
-  justify-content: center
+  justify-content: center;
 }
 </style>

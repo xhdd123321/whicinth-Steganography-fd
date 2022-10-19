@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import {onBeforeUnmount, ref} from 'vue'
-import sysApi from "@/service/api/sys";
-import {ElMessage} from "element-plus";
+import { onBeforeUnmount, ref } from 'vue'
+import sysApi from '@/service/api/sys'
+import { ElMessage } from 'element-plus'
 const decode_intelligent_num = ref(0)
 const encode_image_num = ref(0)
 const encode_doc_num = ref(0)
@@ -21,15 +21,15 @@ const getApiData = async () => {
       decode_doc_num.value = res.data?.decode_doc_num as number
       drift_count.value = res.data?.drift_count as number
     } else {
-      console.log("code: ", res.code)
-      console.log("msg: ", res.message)
+      console.log('code: ', res.code)
+      console.log('msg: ', res.message)
       if (res.data?.err_msg) {
         res.message += ', detail: ' + res.data?.err_msg
       }
       ElMessage.warning(res.message)
     }
   } catch (err) {
-    console.log("err: ", err)
+    console.log('err: ', err)
     ElMessage.error('服务端异常, 错误信息 ' + err)
   }
 }
@@ -51,13 +51,15 @@ onBeforeUnmount(() => {
 
 <template>
   <div class="card-content">
-    <a-page-header
-        title="Monitor"
-        subtitle="site-info"
-        :show-back="false"
-    >
+    <a-page-header title="Monitor" subtitle="site-info" :show-back="false">
       <template #extra>
-        <a-progress :percent="percent" style="width: 20vw" size="medium" :show-text="false" :animation="false"/>
+        <a-progress
+          :percent="percent"
+          style="width: 20vw"
+          size="medium"
+          :show-text="false"
+          :animation="false"
+        />
       </template>
     </a-page-header>
     <a-card>
@@ -102,5 +104,5 @@ onBeforeUnmount(() => {
 </template>
 
 <style scoped>
-@import url("@/style/common.css");
+@import url('@/style/common.css');
 </style>
