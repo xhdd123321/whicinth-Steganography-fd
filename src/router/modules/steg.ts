@@ -100,7 +100,7 @@ export default {
       name: 'drift',
       component: () => import('@/pages/steg/drift/index.vue'),
       meta: {
-        title: '漂流信',
+        title: '风信',
       },
     },
     {
