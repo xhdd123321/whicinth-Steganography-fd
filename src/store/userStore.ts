@@ -7,6 +7,7 @@ export const useUserStore = defineStore({
     location: '',
     lastEncodeTime: Date.now(),
     lastDecodeTime: Date.now(),
+    lastDriftTime: Date.now(),
     limitSecond: 10,
   }),
   getters: {
@@ -41,6 +42,9 @@ export const useUserStore = defineStore({
     },
     updateLastDecodeTime() {
       this.lastDecodeTime = Date.now()
+    },
+    updateLastDriftTime() {
+      this.lastDriftTime = Date.now()
     },
   },
 })

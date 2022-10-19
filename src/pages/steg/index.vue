@@ -1,6 +1,21 @@
 <script setup lang="ts">
-
 import CustomHeader from "@/components/CustomHeader.vue";
+import {onBeforeMount, onMounted} from "vue";
+import {useUserStore} from "@/store/userStore";
+const userStore = useUserStore()
+onBeforeMount(() => {
+  if (sessionStorage.getItem('store')) {
+    userStore.setInfo(Object.assign(
+        {},
+        userStore.$state,
+        JSON.parse(sessionStorage.getItem('store')||'')
+    ))
+  }
+
+  window.addEventListener('beforeunload', () => {
+    sessionStorage.setItem('store', JSON.stringify(userStore.$state))
+  })
+})
 </script>
 
 <template>

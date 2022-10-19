@@ -1,17 +1,22 @@
 <script setup lang="ts">
 import {ElMessage} from "element-plus";
-import {ref} from "vue";
+import {onBeforeUnmount, ref} from "vue";
 import driftApi from "@/service/api/drift";
 import {useRouter} from "vue-router";
 const router = useRouter()
 const drift = ref('')
 const loading = ref(false)
+import {useUserStore} from "@/store/userStore";
+const userStore = useUserStore()
+const goCD = ref(((Date.now() - userStore.lastDriftTime)/1000) / userStore.limitSecond)
+const goCDReady = ref(((Date.now() - userStore.lastDriftTime)/1000) >= userStore.limitSecond)
 const getDriftData = async () => {
   drift.value = ''
   loading.value = true
   try {
     const res = await driftApi.receiveDrift()
     if (res.code === 0) {
+      enterGoCD()
       drift.value = res.data?.url as string
     } else {
       console.log("code: ", res.code)
@@ -31,6 +36,25 @@ const reset = () => {
   drift.value = ''
   loading.value = false
 }
+
+// 全局API冷却时间CD
+const enterGoCD = () => {
+  goCDReady.value = false
+  userStore.updateLastDriftTime()
+  goCD.value = ((Date.now() - userStore.lastDriftTime)/1000) / userStore.limitSecond
+}
+const timeGap = 0.1/userStore.limitSecond
+const updateCD = async () => {
+  if (goCD.value > 1) {
+    goCDReady.value = true
+  } else {
+    goCD.value = goCD.value + timeGap
+  }
+}
+const timer = setInterval(updateCD, 100)
+onBeforeUnmount(() => {
+  clearInterval(timer)
+})
 </script>
 
 <template>
@@ -50,7 +74,12 @@ const reset = () => {
           <template #title>
             <span>接收未知的风信</span>
           </template>
-          <a-button :loading="loading" type="primary" shape="round" @click="getDriftData">GO</a-button>
+          <a-button v-if="goCDReady" :loading="loading" type="primary" shape="round" @click="getDriftData">GO</a-button>
+          <a-progress v-else type="circle" :percent="goCD">
+            <template v-slot:text="scope" >
+              CD
+            </template>
+          </a-progress>
         </a-card>
         <a-card class="step" :loading="loading">
           <template #title>
