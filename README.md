@@ -10,6 +10,10 @@
 
 > 开发文档：[Re：从零搭建 Vue3 轻量级开发脚手架 | 逐暗的小站 (zhu-an.cn)](https://www.zhu-an.cn/todo/Re：从零搭建Vue3轻量级开发脚手架/)
 
+## 简介
+
+![image-20221021004444216](https://img.zhu-an.cn/img/20221021004444.png)
+
 ## 服务部署
 
 ### 一、本地开发
