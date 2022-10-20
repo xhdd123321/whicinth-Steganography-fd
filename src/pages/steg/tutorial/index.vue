@@ -13,9 +13,9 @@ const getWindowResize = () => {
 const introData = [
   {
     value:
-      '\tHello, 这里是 “风信” , 英文名 “whicinth” , 基于图片隐写LSB算法，我们提供了一种有趣的信息加密方式，以图片为载体，承载图片或文字信息，' +
+      '\tHello，这里是 “风信”，英文名 “whicinth”，基于图片隐写LSB算法，我们提供了一种有趣的信息加密方式，以图片为载体，承载图片或文字信息，' +
       '你既可以用这种方式加密存储自己的重要信息，也可以用这种特别的方式与他人暗中进行交换信息，' +
-      '又或者你对网络安全很感兴趣，也可以用本站点测试CTF里的图片隐写，站点的前后端代码都开源在github仓库（虽然写的很烂哈哈)，感兴趣的同学可以一起交流学习~',
+      '又或者你对网络安全很感兴趣，也可以用本站点测试CTF里的图片隐写，站点的前后端代码都开源在github仓库（虽然写的很烂哈哈)，感兴趣的同学欢迎一起交流学习~',
   },
 ]
 const data = [
@@ -71,18 +71,26 @@ const qaData = [
       <template #extra>
         <div>
           <a-space>
-            <a href="https://github.com/xhdd123321/whicinth-steganography-fd" target="_blank">
-              <img
-                src="https://img.shields.io/badge/front-100000?style=for-the-badge&logo=github&logoColor=white"
-                alt="FRONT"
-              />
-            </a>
-            <a href="https://github.com/xhdd123321/whicinth-steganography-bd" target="_blank">
-              <img
-                src="https://img.shields.io/badge/back-100000?style=for-the-badge&logo=github&logoColor=white"
-                alt="BACK"
-              />
-            </a>
+            <a-link
+              href="https://github.com/xhdd123321/whicinth-steganography-fd"
+              target="_blank"
+              style="color: #313132"
+            >
+              <template #icon>
+                <icon-github />
+              </template>
+              Front
+            </a-link>
+            <a-link
+              href="https://github.com/xhdd123321/whicinth-steganography-bd"
+              target="_blank"
+              style="color: #313132"
+            >
+              <template #icon>
+                <icon-github />
+              </template>
+              Back
+            </a-link>
           </a-space>
         </div>
       </template>
