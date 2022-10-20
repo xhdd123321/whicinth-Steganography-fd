@@ -176,10 +176,6 @@ onBeforeUnmount(() => {
 
 <style scoped>
 @import url('@/style/common.css');
-.upload-image {
-  display: flex;
-  justify-content: center;
-}
 .step {
   margin-bottom: -1px;
 }

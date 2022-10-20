@@ -19,9 +19,11 @@
 ### 一、本地开发
 
 #### 配置文件
+
 本地启动项目`.env.development`中的变量会自动注入环境
 
 #### 部署流程
+
 1. git clone & cd
 2. yarn # 安装依赖
 3. yarn dev # 开发模式启动项目
@@ -29,14 +31,17 @@
 ### 二、线上部署
 
 #### 配置文件
+
 打包时`.env.development`中的变量会自动注入环境
 
 #### 部署流程
-1. yarn build
-2. 上传dist至服务器站点目录
-3. 配置nginx,示例如下:
 
-#### NGINX配置参考
+1. yarn build
+2. 上传 dist 至服务器站点目录
+3. 配置 nginx,示例如下:
+
+#### NGINX 配置参考
+
 ```shell
 # http配置转发https
 server {
@@ -66,7 +71,7 @@ server {
                 proxy_set_header X-Forwarded-For $remote_addr;
                 proxy_pass http://127.0.0.1:8888;
         }
-        
+
         # 前端服务
         location / {
                 root /var/www/whicinth-steganography-fd/dist;
