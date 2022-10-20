@@ -28,6 +28,7 @@ declare module '@vue/runtime-core' {
     ARadioGroup: typeof import('@arco-design/web-vue')['RadioGroup']
     AResult: typeof import('@arco-design/web-vue')['Result']
     ARow: typeof import('@arco-design/web-vue')['Row']
+    ASpace: typeof import('@arco-design/web-vue')['Space']
     AStatistic: typeof import('@arco-design/web-vue')['Statistic']
     ATextarea: typeof import('@arco-design/web-vue')['Textarea']
     ATypographyParagraph: typeof import('@arco-design/web-vue')['TypographyParagraph']

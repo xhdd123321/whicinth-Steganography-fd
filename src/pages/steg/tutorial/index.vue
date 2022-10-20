@@ -14,7 +14,7 @@ const introData = [
   {
     value:
       '\tHello, 这里是 “风信” , 英文名 “whicinth” , 基于图片隐写LSB算法，我们提供了一种有趣的信息加密方式，以图片为载体，承载图片或文字信息，' +
-        '你既可以用这种方式加密存储自己的重要信息，也可以用这种特别的方式与他人暗中进行交换信息，' +
+      '你既可以用这种方式加密存储自己的重要信息，也可以用这种特别的方式与他人暗中进行交换信息，' +
       '又或者你对网络安全很感兴趣，也可以用本站点测试CTF里的图片隐写，站点的前后端代码都开源在github仓库（虽然写的很烂哈哈)，感兴趣的同学可以一起交流学习~',
   },
 ]
@@ -51,7 +51,8 @@ const data = [
 const qaData = [
   {
     label: 'Q：连续发起加密/解密请求总是失败 ?',
-    value: 'A：站点由于服务器资源有限, 针对加密/解密接口分别作了ip限流, 每10s仅可发起一次加密/解密请求',
+    value:
+      'A：站点由于服务器资源有限, 针对加密/解密接口分别作了ip限流, 每10s仅可发起一次加密/解密请求',
   },
   {
     label: 'Q：xxx failed, 弹出橙色warn信息 ?',
@@ -66,7 +67,26 @@ const qaData = [
 
 <template>
   <div class="card-content">
-    <a-page-header title="Tutorial" subtitle="quick start" :show-back="false"> </a-page-header>
+    <a-page-header title="Tutorial" subtitle="quick start" :show-back="false">
+      <template #extra>
+        <div>
+          <a-space>
+            <a href="https://github.com/xhdd123321/whicinth-steganography-fd" target="_blank">
+              <img
+                src="https://img.shields.io/badge/front-100000?style=for-the-badge&logo=github&logoColor=white"
+                alt="FRONT"
+              />
+            </a>
+            <a href="https://github.com/xhdd123321/whicinth-steganography-bd" target="_blank">
+              <img
+                src="https://img.shields.io/badge/back-100000?style=for-the-badge&logo=github&logoColor=white"
+                alt="BACK"
+              />
+            </a>
+          </a-space>
+        </div>
+      </template>
+    </a-page-header>
     <a-avatar-group style="margin-bottom: 3vh" :size="20 + windowsWidth / 40">
       <a-avatar :style="{ backgroundColor: 'rgb(var(--arcoblue-3))' }">W</a-avatar>
       <a-avatar :style="{ backgroundColor: 'rgb(var(--arcoblue-4))' }">H</a-avatar>
