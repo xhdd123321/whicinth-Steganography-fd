@@ -8,11 +8,11 @@
 - 基于 Vue3.0 全家桶（Vue 3 + TypeScript + Vite）
 - 配套[后端](https://github.com/xhdd123321/whicinth-Steganography-bd)戳这里
 
-开发文档：[Re：从零搭建 Vue3 轻量级开发脚手架 | 逐暗的小站 (zhu-an.cn)](https://www.zhu-an.cn/todo/Re：从零搭建Vue3轻量级开发脚手架/)
+> 开发文档：[Re：从零搭建 Vue3 轻量级开发脚手架 | 逐暗的小站 (zhu-an.cn)](https://www.zhu-an.cn/todo/Re：从零搭建Vue3轻量级开发脚手架/)
 
 ## 服务部署
 
-### 1、本地开发
+### 一、本地开发
 
 #### 配置文件
 本地启动项目`.env.development`中的变量会自动注入环境
@@ -22,7 +22,7 @@
 2. yarn # 安装依赖
 3. yarn dev # 开发模式启动项目
 
-### 2、线上部署
+### 二、线上部署
 
 #### 配置文件
 打包时`.env.development`中的变量会自动注入环境
