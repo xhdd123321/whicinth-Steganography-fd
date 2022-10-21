@@ -21,7 +21,7 @@ const checkGoReady = () => {
   return goReady.value
 }
 const beforeCarrierUpload = (data: { file: UploadFileInfo; fileList: UploadFileInfo[] }) => {
-  if (data.file.file?.size || 0 > 20*1024*1024) {
+  if ((data.file.file?.size || 0) > 10*1024*1024) {
     ElMessage.warning('上传文件不能超过10M')
     return false
   }
