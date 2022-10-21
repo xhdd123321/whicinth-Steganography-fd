@@ -29,7 +29,7 @@ const checkGoReady = () => {
     formData.value.has("carrier_file") &&
     formData.value.has("data_file");
   return goReady.value;
-}
+};
 const beforeCarrierUpload = (data: {
   file: UploadFileInfo;
   fileList: UploadFileInfo[];
@@ -39,7 +39,7 @@ const beforeCarrierUpload = (data: {
     return false;
   }
   // 计算图片容量
-  const reader = new FileReader()
+  const reader = new FileReader();
   reader.readAsDataURL(data.file.file as Blob);
   reader.onload = () => {
     const image = new Image();
@@ -49,24 +49,24 @@ const beforeCarrierUpload = (data: {
         ((image.width * image.height * 3) / 8388608).toFixed(3)
       );
       checkGoReady();
-    }
-  }
+    };
+  };
   formData.value.set("carrier_file", data.file.file as File);
   checkGoReady();
   return true;
-}
+};
 const beforeCarrierRemove = () => {
   maxCapacity.value = 0;
   formData.value.delete("carrier_file");
   checkGoReady();
   return true;
-}
+};
 const beforeDataRemove = () => {
   dataSize.value = 0;
   formData.value.delete("data_file");
   checkGoReady();
   return true;
-}
+};
 const beforeDataUpload = (data: {
   file: UploadFileInfo;
   fileList: UploadFileInfo[];
@@ -81,10 +81,10 @@ const beforeDataUpload = (data: {
   formData.value.set("data_file", data.file.file as File);
   checkGoReady();
   return true;
-}
+};
 const updateShare = (value: boolean) => {
   isShare.value = value;
-}
+};
 const clearResult = () => {
   maxCapacity.value = 0;
   dataSize.value = 0;
@@ -94,7 +94,7 @@ const clearResult = () => {
   uploadRefOther.value.clear();
   formData.value.delete("data_file");
   resultUrl.value = "";
-}
+};
 const encodeHandle = async () => {
   if (maxCapacity.value <= dataSize.value) {
     ElMessage.warning(
@@ -104,7 +104,7 @@ const encodeHandle = async () => {
         maxCapacity.value +
         "M"
     );
-    return
+    return;
   }
   loading.value = true;
   try {
@@ -127,10 +127,10 @@ const encodeHandle = async () => {
     ElMessage.error("服务端异常, 错误信息 " + err);
   }
   loading.value = false;
-}
+};
 const reset = () => {
   clearResult();
-}
+};
 
 // 全局API冷却时间CD
 const enterGoCD = () => {
@@ -138,7 +138,7 @@ const enterGoCD = () => {
   userStore.updateLastEncodeTime();
   goCD.value =
     (Date.now() - userStore.lastEncodeTime) / 1000 / userStore.limitSecond;
-}
+};
 const timeGap = 0.1 / userStore.limitSecond;
 const updateCD = async () => {
   if (goCD.value > 1) {
@@ -150,7 +150,7 @@ const updateCD = async () => {
 const timer = setInterval(updateCD, 100);
 onBeforeUnmount(() => {
   clearInterval(timer);
-})
+});
 </script>
 
 <template>

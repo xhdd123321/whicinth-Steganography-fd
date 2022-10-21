@@ -2,6 +2,7 @@
 import CustomHeader from "@/components/CustomHeader.vue";
 import { onBeforeMount } from "vue";
 import { useUserStore } from "@/store/userStore";
+import CustomFooter from "@/components/CustomFooter.vue";
 const userStore = useUserStore();
 onBeforeMount(() => {
   if (sessionStorage.getItem("store")) {
@@ -25,7 +26,7 @@ onBeforeMount(() => {
     <a-layout>
       <a-layout-header><CustomHeader /></a-layout-header>
       <a-layout-content><router-view /></a-layout-content>
-      <a-layout-footer class="footer">Powered by zhu-an</a-layout-footer>
+      <a-layout-footer><CustomFooter /></a-layout-footer>
     </a-layout>
   </div>
 </template>
@@ -34,7 +35,5 @@ onBeforeMount(() => {
 .common-layout {
   width: 100vw;
   height: 100vh;
-}
-.footer {
 }
 </style>
