@@ -22,7 +22,7 @@ const dataSize = ref(0);
 const checkGoReady = () => {
   goReady.value = formData.value.has("carrier_file");
   return goReady.value;
-};
+}
 const beforeCarrierUpload = (data: {
   file: UploadFileInfo;
   fileList: UploadFileInfo[];
@@ -37,20 +37,20 @@ const beforeCarrierUpload = (data: {
   formData.value.set("carrier_file", data.file.file as File);
   checkGoReady();
   return true;
-};
+}
 const beforeCarrierRemove = () => {
   dataSize.value = 0;
   formData.value.delete("carrier_file");
   checkGoReady();
   return true;
-};
+}
 const clearResult = () => {
   dataSize.value = 0;
   goReady.value = false;
   uploadRef.value.clear();
   formData.value.delete("carrier_file");
   resultUrl.value = "";
-};
+}
 const decodeHandle = async () => {
   loading.value = true;
   try {
@@ -73,10 +73,10 @@ const decodeHandle = async () => {
     ElMessage.error("服务端异常, 错误信息 " + err);
   }
   loading.value = false;
-};
+}
 const reset = () => {
   clearResult();
-};
+}
 
 // 全局API冷却时间CD
 const enterGoCD = () => {
@@ -84,7 +84,7 @@ const enterGoCD = () => {
   userStore.updateLastDecodeTime();
   goCD.value =
     (Date.now() - userStore.lastDecodeTime) / 1000 / userStore.limitSecond;
-};
+}
 const timeGap = 0.1 / userStore.limitSecond;
 const updateCD = async () => {
   if (goCD.value > 1) {
@@ -96,7 +96,7 @@ const updateCD = async () => {
 const timer = setInterval(updateCD, 100);
 onBeforeUnmount(() => {
   clearInterval(timer);
-});
+})
 </script>
 
 <template>
@@ -150,12 +150,12 @@ onBeforeUnmount(() => {
         :loading="loading"
         type="primary"
         shape="round"
-        @click="decodeHandle"
         :disabled="!goReady"
+        @click="decodeHandle"
         >GO</a-button
       >
       <a-progress v-else type="circle" :percent="goCD">
-        <template v-slot:text=""> CD </template>
+        <template #text> CD </template>
       </a-progress>
     </a-card>
     <a-card class="step" :loading="loading">
