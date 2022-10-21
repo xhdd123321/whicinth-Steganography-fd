@@ -1,10 +1,10 @@
-import { defineStore } from 'pinia'
+import { defineStore } from "pinia";
 
 export const useUserStore = defineStore({
-  id: 'user',
+  id: "user",
   state: () => ({
-    username: '游客',
-    location: '',
+    username: "游客",
+    location: "",
     lastEncodeTime: Date.now(),
     lastDecodeTime: Date.now(),
     lastDriftTime: 0,
@@ -12,39 +12,39 @@ export const useUserStore = defineStore({
   }),
   getters: {
     hasLocation(state) {
-      return state.location !== ''
+      return state.location !== "";
     },
   },
   actions: {
     // Set user's information
     setInfo(partial: object) {
-      this.$patch(partial)
+      this.$patch(partial);
     },
 
     // Set user's location
     setLocation(data: string) {
-      this.location = data
+      this.location = data;
     },
 
     // Set user's username
     setUsername(data: string) {
-      this.username = data
+      this.username = data;
     },
 
     // Reset user's information
     resetInfo() {
-      console.log('reset userInfo !')
-      this.$reset()
+      console.log("reset userInfo !");
+      this.$reset();
     },
 
     updateLastEncodeTime() {
-      this.lastEncodeTime = Date.now()
+      this.lastEncodeTime = Date.now();
     },
     updateLastDecodeTime() {
-      this.lastDecodeTime = Date.now()
+      this.lastDecodeTime = Date.now();
     },
     updateLastDriftTime() {
-      this.lastDriftTime = Date.now()
+      this.lastDriftTime = Date.now();
     },
   },
-})
+});

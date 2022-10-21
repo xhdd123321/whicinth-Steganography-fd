@@ -1,10 +1,10 @@
-import { ResType } from '@/service/http'
+import { ResType } from "@/service/http";
 
 export interface IDriftData {
-  url: string
-  err_msg?: string
+  url: string;
+  err_msg?: string;
 }
 
 export interface IDriftApi {
-  receiveDrift: () => Promise<ResType<IDriftData>>
+  receiveDrift: () => Promise<ResType<IDriftData>>;
 }

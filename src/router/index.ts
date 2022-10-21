@@ -1,9 +1,14 @@
-import { createRouter, createWebHistory, Router, RouteRecordRaw } from 'vue-router'
-import steg from '@/router/modules/steg'
-import other from '@/router/modules/other'
-import NProgress from 'nprogress'
+import {
+  createRouter,
+  createWebHistory,
+  Router,
+  RouteRecordRaw,
+} from "vue-router";
+import steg from "@/router/modules/steg";
+import other from "@/router/modules/other";
+import NProgress from "nprogress";
 
-const routes: RouteRecordRaw[] = [{ path: '/', redirect: 'steg' }, steg, other]
+const routes: RouteRecordRaw[] = [{ path: "/", redirect: "steg" }, steg, other];
 
 const router: Router = createRouter({
   history: createWebHistory(), // createWebHashHistory()
@@ -12,24 +17,25 @@ const router: Router = createRouter({
   scrollBehavior(to, from, savedPosition) {
     return new Promise((resolve) => {
       if (savedPosition) {
-        return savedPosition
+        return savedPosition;
       } else {
         if (from.meta.saveSrollTop) {
-          const top: number = document.documentElement.scrollTop || document.body.scrollTop
-          resolve({ left: 0, top })
+          const top: number =
+            document.documentElement.scrollTop || document.body.scrollTop;
+          resolve({ left: 0, top });
         }
       }
-    })
+    });
   },
-})
+});
 
 router.beforeEach((to, from, next) => {
-  NProgress.start()
-  next()
-})
+  NProgress.start();
+  next();
+});
 
-router.afterEach((to, from) => {
-  NProgress.done()
-})
+router.afterEach(() => {
+  NProgress.done();
+});
 
-export default router
+export default router;

@@ -1,10 +1,10 @@
-import http from '@/service/http'
-import { IDriftApi } from '@/service/api/drift_types'
+import http from "@/service/http";
+import { IDriftApi } from "@/service/api/drift_types";
 
 const driftApi: IDriftApi = {
   receiveDrift() {
-    return http.get<any>('drift/receive')
+    return http.get<any>("drift/receive");
   },
-}
+};
 
-export default driftApi
+export default driftApi;

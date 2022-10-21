@@ -1,11 +1,11 @@
 <script setup lang="ts">
-import { useRouter } from 'vue-router'
+import { useRouter } from "vue-router";
 
-const router = useRouter()
+const router = useRouter();
 const back = () => {
   // warning： Go to the node that has the permission
-  router.back()
-}
+  router.back();
+};
 </script>
 
 <template>
