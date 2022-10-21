@@ -155,7 +155,7 @@ onBeforeUnmount(() => {
         >GO</a-button
       >
       <a-progress v-else type="circle" :percent="goCD">
-        <template> CD </template>
+        <template v-slot:text=""> CD </template>
       </a-progress>
     </a-card>
     <a-card class="step" :loading="loading">
