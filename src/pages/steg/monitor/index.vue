@@ -9,20 +9,19 @@ const encode_doc_num = ref(0);
 const decode_image_num = ref(0);
 const decode_doc_num = ref(0);
 const drift_count = ref(0);
-// eslint-disable-next-line vue/return-in-computed-property
 const memStatus = computed(() => {
-  if (sys_info.mem_percent > 0.6) {
+  if (sys_info.mem_percent > 60) {
     return "warning";
-  } else if (sys_info.mem_percent > 0.9) {
+  } else if (sys_info.mem_percent > 90) {
     return "danger";
   } else {
     return "success";
   }
 });
 const cpuStatus = computed(() => {
-  if (sys_info.cpu_percent > 0.6) {
+  if (sys_info.cpu_percent > 60) {
     return "warning";
-  } else if (sys_info.cpu_percent > 0.9) {
+  } else if (sys_info.cpu_percent > 90) {
     return "danger";
   } else {
     return "success";
@@ -67,14 +66,14 @@ const getSysData = async () => {
     const res = await sysApi.getSysMonitor();
     if (res.code === 0) {
       sys_info.cpu_cores = res.data?.cpu_cores || 0;
-      sys_info.cpu_percent = (res.data?.cpu_percent || 0) / 100;
+      sys_info.cpu_percent = res.data?.cpu_percent || 0;
       sys_info.mem_total = Number(
         ((res.data?.mem_total || 0) / (1 << 30)).toFixed(1)
       );
       sys_info.mem_used = Number(
         ((res.data?.mem_used || 0) / (1 << 30)).toFixed(1)
       );
-      sys_info.mem_percent = (res.data?.mem_percent || 0) / 100;
+      sys_info.mem_percent = res.data?.mem_percent || 0;
     } else {
       console.log("code: ", res.code);
       console.log("msg: ", res.message);
@@ -182,13 +181,11 @@ onBeforeUnmount(() => {
               >MEM（{{ sys_info.mem_used }}G/{{ sys_info.mem_total }}G）</span
             >
             <a-progress
-              :percent="sys_info.mem_percent"
+              :percent="sys_info.mem_percent / 100"
               size="large"
               :status="memStatus"
             >
-              <template v-slot:text="scope">
-                {{ scope.percent * 100 }}%
-              </template>
+              <template #text> {{ sys_info.mem_percent }}% </template>
             </a-progress>
           </a-col>
         </a-row>
@@ -198,13 +195,11 @@ onBeforeUnmount(() => {
               CPU（{{ sys_info.cpu_cores }} Cores）
             </span>
             <a-progress
-              :percent="sys_info.cpu_percent"
+              :percent="sys_info.cpu_percent / 100"
               size="large"
               :status="cpuStatus"
             >
-              <template v-slot:text="scope">
-                {{ scope.percent * 100 }}%
-              </template>
+              <template #text> {{ sys_info.cpu_percent }}% </template>
             </a-progress>
           </a-col>
         </a-row>
