@@ -135,6 +135,12 @@ onBeforeUnmount(() => {
 <template>
   <div class="custom-zip">
     <a-card class="step">
+      <a-tag v-show="dataSize" color="green">
+        <template #icon>
+          <icon-check-circle-fill />
+        </template>
+        {{ dataSize }}M
+      </a-tag>
       <a-row>
         <n-upload
           ref="uploadRef"
@@ -195,7 +201,7 @@ onBeforeUnmount(() => {
               <span>type</span>
             </a-col>
             <a-col :span="22" v-show="result.output.url">
-              <span>{{ result.input.type }} -> {{ result.output.type }}</span>
+              <span>{{ result.output.type }}</span>
             </a-col>
           </a-row>
           <a-row style="padding: 1vh 0 1vh 0" justify="start">
