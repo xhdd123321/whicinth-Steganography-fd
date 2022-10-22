@@ -4,7 +4,7 @@
   <footer class="custom-footer">
     <a-space direction="vertical">
       <div>
-        <a-space style="padding-top: 20px">
+        <a-space :style="beian" wrap>
           <a href="https://beian.miit.gov.cn/" rel="noopener" target="_blank">
             京ICP备 2020035293号-1
           </a>
@@ -31,8 +31,14 @@
 </template>
 
 <style scoped>
+.beian {
+  padding-top: 20px;
+  display: flex;
+  justify-content: center;
+}
 .custom-footer {
   display: flex;
   justify-content: center;
+  padding: 0 5vw 0 5vw;
 }
 </style>
