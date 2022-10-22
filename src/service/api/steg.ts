@@ -17,6 +17,9 @@ const stegApi: IStegApi = {
   decodeIntelligent(params) {
     return http.upload<any>("steg/decode_intelligent", params);
   },
+  compressImage(params) {
+    return http.upload<any>("pre/compress", params);
+  },
 };
 
 export default stegApi;

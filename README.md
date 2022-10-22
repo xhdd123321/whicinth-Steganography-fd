@@ -16,6 +16,26 @@
 
 ## 服务部署
 
+### 前置准备
+
+本地新建环境变量配置文件
+
+`.env.development`:
+
+```shell
+NODE_ENV=development
+
+VITE_PROXY_DOMAIN = '/api'
+```
+
+`.env.production`:
+
+```shell
+NODE_ENV=production
+
+VITE_PROXY_DOMAIN = '/api'
+```
+
 ### 一、本地开发
 
 #### 配置文件

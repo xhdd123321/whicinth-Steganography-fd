@@ -37,6 +37,24 @@ export interface IDecodeIntelligentRespData {
   err_msg?: string;
 }
 
+interface input {
+  size: number;
+  type: string;
+}
+interface output {
+  size: number;
+  type: string;
+  width: number;
+  height: number;
+  ratio: number;
+  url: string;
+}
+export interface ICompressRespData {
+  input: input;
+  output: output;
+  err_msg?: string;
+}
+
 export interface IStegApi {
   encodeImage: (
     params: FormData,
@@ -51,4 +69,5 @@ export interface IStegApi {
   decodeIntelligent: (
     params: FormData
   ) => Promise<ResType<IDecodeIntelligentRespData>>;
+  compressImage: (params: FormData) => Promise<ResType<ICompressRespData>>;
 }

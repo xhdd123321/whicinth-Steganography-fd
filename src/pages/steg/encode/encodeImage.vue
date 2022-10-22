@@ -23,6 +23,10 @@ const uploadRefOther = ref();
 const isShare = ref(true);
 const maxCapacity = ref(0);
 const dataSize = ref(0);
+const zipVisible = ref(false);
+const exitZip = () => {
+  zipVisible.value = false;
+};
 const checkGoReady = () => {
   goReady.value =
     maxCapacity.value > dataSize.value &&
@@ -132,6 +136,9 @@ const reset = () => {
   clearResult();
 };
 
+const triggerZip = () => {
+  zipVisible.value = true;
+};
 // 全局API冷却时间CD
 const enterGoCD = () => {
   goCDReady.value = false;
@@ -168,13 +175,11 @@ onBeforeUnmount(() => {
       </template>
     </a-page-header>
     <n-alert title="" type="info">
-      上传图片>2M建议用<a-link
-        href="https://tinypng.com/"
-        status="warning"
-        target="_blank"
-        icon
-        >图片压缩服务</a-link
-      >压缩图片体积，否则处理速度可能较慢
+      上传图片大于2M建议对图片进行压缩
+      <a-divider direction="vertical" />
+      <a-button type="primary" @click="triggerZip" size="mini"
+        >图片无损压缩</a-button
+      >
     </n-alert>
     <a-card class="step">
       <template #title>
@@ -264,6 +269,17 @@ onBeforeUnmount(() => {
       <a-image v-else width="70%" class="result-image" :src="resultUrl" />
     </a-card>
   </div>
+  <a-drawer
+    height="65vh"
+    :visible="zipVisible"
+    placement="top"
+    :closable="false"
+    :footer="false"
+    :header="false"
+    @cancel="exitZip"
+  >
+    <div><CustomZipModal /></div>
+  </a-drawer>
 </template>
 
 <style scoped>

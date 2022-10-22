@@ -7,6 +7,7 @@ import { UploadFileInfo } from "naive-ui";
 import { useUserStore } from "@/store/userStore";
 import CutomZipModal from "@/components/CustomZipModal.vue";
 import CustomZipModal from "@/components/CustomZipModal.vue";
+
 const userStore = useUserStore();
 const goCD = ref(
   (Date.now() - userStore.lastEncodeTime) / 1000 / userStore.limitSecond
@@ -161,14 +162,11 @@ onBeforeUnmount(() => {
       </template>
     </a-page-header>
     <n-alert title="" type="info">
-      上传图片>2M建议用<a-link
-        href="https://tinypng.com/"
-        status="warning"
-        target="_blank"
-        icon
-        >图片压缩服务</a-link
-      >压缩图片体积，否则处理速度可能较慢
-      <a-button type="primary" @click="triggerZip">Open Drawer</a-button>
+      上传图片大于2M建议对图片进行压缩
+      <a-divider direction="vertical" />
+      <a-button type="primary" @click="triggerZip" size="mini"
+        >图片无损压缩</a-button
+      >
     </n-alert>
     <a-card class="step">
       <template #title>
@@ -263,10 +261,9 @@ onBeforeUnmount(() => {
     placement="top"
     :closable="false"
     :footer="false"
+    :header="false"
     @cancel="exitZip"
-    unmountOnClose
   >
-    <template #title> ZIP </template>
     <div><CustomZipModal /></div>
   </a-drawer>
 </template>
