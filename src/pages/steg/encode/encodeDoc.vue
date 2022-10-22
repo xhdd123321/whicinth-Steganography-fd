@@ -5,6 +5,8 @@ import stegApi from "@/service/api/steg";
 import { ElMessage } from "element-plus";
 import { UploadFileInfo } from "naive-ui";
 import { useUserStore } from "@/store/userStore";
+import CutomZipModal from "@/components/CustomZipModal.vue";
+import CustomZipModal from "@/components/CustomZipModal.vue";
 const userStore = useUserStore();
 const goCD = ref(
   (Date.now() - userStore.lastEncodeTime) / 1000 / userStore.limitSecond
@@ -22,6 +24,10 @@ const uploadRef = ref();
 const isShare = ref(true);
 const maxCapacity = ref(0);
 const dataSize = ref(0);
+const zipVisible = ref(false);
+const exitZip = () => {
+  zipVisible.value = false;
+};
 const checkGoReady = () => {
   goReady.value =
     maxCapacity.value > dataSize.value &&
@@ -116,6 +122,9 @@ const reset = () => {
   clearResult();
 };
 
+const triggerZip = () => {
+  zipVisible.value = true;
+};
 // 全局API冷却时间CD
 const enterGoCD = () => {
   goCDReady.value = false;
@@ -159,6 +168,7 @@ onBeforeUnmount(() => {
         icon
         >图片压缩服务</a-link
       >压缩图片体积，否则处理速度可能较慢
+      <a-button type="primary" @click="triggerZip">Open Drawer</a-button>
     </n-alert>
     <a-card class="step">
       <template #title>
@@ -247,6 +257,18 @@ onBeforeUnmount(() => {
       <a-image v-else width="70%" class="result-image" :src="resultUrl" />
     </a-card>
   </div>
+  <a-drawer
+    height="65vh"
+    :visible="zipVisible"
+    placement="top"
+    :closable="false"
+    :footer="false"
+    @cancel="exitZip"
+    unmountOnClose
+  >
+    <template #title> ZIP </template>
+    <div><CustomZipModal /></div>
+  </a-drawer>
 </template>
 
 <style scoped>
