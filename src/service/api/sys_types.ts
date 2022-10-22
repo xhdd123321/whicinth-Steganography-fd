@@ -10,6 +10,16 @@ export interface IApiStatisticData {
   err_msg?: string;
 }
 
+export interface ISysMonitorData {
+  cpu_cores: number;
+  cpu_percent: number;
+  mem_total: number;
+  mem_used: number;
+  mem_percent: number;
+  err_msg?: string;
+}
+
 export interface ISysApi {
   getApiStatistic: () => Promise<ResType<IApiStatisticData>>;
+  getSysMonitor: () => Promise<ResType<ISysMonitorData>>;
 }

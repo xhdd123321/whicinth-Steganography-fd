@@ -5,6 +5,9 @@ const sysApi: ISysApi = {
   getApiStatistic() {
     return http.get<any>("sys/api_statistic");
   },
+  getSysMonitor() {
+    return http.get<any>("sys/monitor");
+  },
 };
 
 export default sysApi;

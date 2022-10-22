@@ -1,14 +1,42 @@
 <script setup lang="ts">
-import { onBeforeUnmount, ref } from "vue";
+import { computed, onBeforeUnmount, reactive, ref } from "vue";
 import sysApi from "@/service/api/sys";
 import { ElMessage } from "element-plus";
+import { ISysMonitorData } from "@/service/api/sys_types";
 const decode_intelligent_num = ref(0);
 const encode_image_num = ref(0);
 const encode_doc_num = ref(0);
 const decode_image_num = ref(0);
 const decode_doc_num = ref(0);
 const drift_count = ref(0);
-const percent = ref(0.0);
+// eslint-disable-next-line vue/return-in-computed-property
+const memStatus = computed(() => {
+  if (sys_info.mem_percent > 0.6) {
+    return "warning";
+  } else if (sys_info.mem_percent > 0.9) {
+    return "danger";
+  } else {
+    return "success";
+  }
+});
+const cpuStatus = computed(() => {
+  if (sys_info.cpu_percent > 0.6) {
+    return "warning";
+  } else if (sys_info.cpu_percent > 0.9) {
+    return "danger";
+  } else {
+    return "success";
+  }
+});
+const sys_info: ISysMonitorData = reactive({
+  cpu_cores: 0,
+  cpu_percent: 0,
+  mem_total: 0,
+  mem_used: 0,
+  mem_percent: 0,
+  err_msg: undefined,
+});
+const percent = ref(0.01);
 
 const getApiData = async () => {
   try {
@@ -34,15 +62,47 @@ const getApiData = async () => {
   }
 };
 
+const getSysData = async () => {
+  try {
+    const res = await sysApi.getSysMonitor();
+    if (res.code === 0) {
+      sys_info.cpu_cores = res.data?.cpu_cores || 0;
+      sys_info.cpu_percent = Number(
+        ((res.data?.cpu_percent || 0) / 100).toFixed(2)
+      );
+      sys_info.mem_total = Number(
+        ((res.data?.mem_total || 0) / (1 << 30)).toFixed(1)
+      );
+      sys_info.mem_used = Number(
+        ((res.data?.mem_used || 0) / (1 << 30)).toFixed(1)
+      );
+      sys_info.mem_percent = (res.data?.mem_percent || 0) / 100;
+    } else {
+      console.log("code: ", res.code);
+      console.log("msg: ", res.message);
+      if (res.data?.err_msg) {
+        res.message += ", detail: " + res.data?.err_msg;
+      }
+      ElMessage.warning(res.message);
+    }
+  } catch (err) {
+    console.log("err: ", err);
+    ElMessage.error("服务端异常, 错误信息 " + err);
+  }
+};
+
 const updateData = async () => {
   if (percent.value > 1.05) {
-    await getApiData();
     percent.value = 0;
-  } else {
+    getApiData();
+    await getSysData();
+    percent.value = percent.value + 0.01;
+  } else if (percent.value != 0) {
     percent.value = percent.value + 0.02;
   }
 };
 getApiData();
+getSysData();
 const timer = setInterval(updateData, 100);
 onBeforeUnmount(() => {
   clearInterval(timer);
@@ -64,7 +124,7 @@ onBeforeUnmount(() => {
     </a-page-header>
     <a-card>
       <div class="content-container">
-        <a-row style="padding: 5vh">
+        <a-row style="padding: 5vh 5vw">
           <a-col :flex="1">
             <a-statistic
               title="加密-图片"
@@ -93,7 +153,7 @@ onBeforeUnmount(() => {
             </a-statistic>
           </a-col>
         </a-row>
-        <a-row style="padding: 5vh">
+        <a-row style="padding: 5vh 5vw">
           <a-col :flex="1">
             <a-statistic
               title="解密-文字"
@@ -116,6 +176,38 @@ onBeforeUnmount(() => {
             <a-statistic title="信箱" :value="drift_count" show-group-separator>
               <template #suffix>封</template>
             </a-statistic>
+          </a-col>
+        </a-row>
+        <a-row style="padding: 2vh 0 7vh 10vw; width: 75%">
+          <a-col :flex="1">
+            <span style="padding-right: 30%"
+              >MEM（{{ sys_info.mem_used }}G/{{ sys_info.mem_total }}G）</span
+            >
+            <a-progress
+              :percent="sys_info.mem_percent"
+              size="large"
+              :status="memStatus"
+            >
+              <template v-slot:text="scope">
+                {{ scope.percent * 100 }}%
+              </template>
+            </a-progress>
+          </a-col>
+        </a-row>
+        <a-row style="padding: 0 0 5vh 10vw; width: 75%">
+          <a-col :flex="1">
+            <span style="padding-right: 30%">
+              CPU（{{ sys_info.cpu_cores }} Cores）
+            </span>
+            <a-progress
+              :percent="sys_info.cpu_percent"
+              size="large"
+              :status="cpuStatus"
+            >
+              <template v-slot:text="scope">
+                {{ scope.percent * 100 }}%
+              </template>
+            </a-progress>
           </a-col>
         </a-row>
       </div>
