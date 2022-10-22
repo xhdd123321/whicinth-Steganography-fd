@@ -71,7 +71,9 @@ onBeforeUnmount(() => {
       </template>
     </a-page-header>
     <div class="content-container">
-      <n-alert title="" type="info"> 试试点击下面的按钮 (～￣▽￣)～ </n-alert>
+      <n-alert title="" type="info">
+        试试点击下面的按钮, 然后将收到的图片解密一下 (～￣▽￣)～
+      </n-alert>
       <a-card class="step">
         <a-button type="primary" shape="round" @click="triggerButton"
           >Whi-cinth</a-button
