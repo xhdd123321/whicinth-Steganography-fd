@@ -76,7 +76,9 @@ const getSysData = async () => {
       sys_info.mem_used = Number(
         ((res.data?.mem_used || 0) / (1 << 30)).toFixed(1)
       );
-      sys_info.mem_percent = (res.data?.mem_percent || 0) / 100;
+      sys_info.mem_percent = Number(
+        ((res.data?.mem_percent || 0) / 100).toFixed(2)
+      );
     } else {
       console.log("code: ", res.code);
       console.log("msg: ", res.message);
