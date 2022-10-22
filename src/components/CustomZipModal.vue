@@ -93,7 +93,7 @@ const compressHandle = async () => {
       result.output.ratio = (res.data?.output.ratio || 0.0) * 100;
       result.output.url = res.data?.output.url || "";
       result.err_msg = undefined;
-      ElMessage.success("解密成功!");
+      ElMessage.success("压缩成功!");
     } else {
       console.log("code: ", res.code);
       console.log("msg: ", res.message);

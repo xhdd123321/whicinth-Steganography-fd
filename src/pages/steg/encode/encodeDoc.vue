@@ -5,7 +5,6 @@ import stegApi from "@/service/api/steg";
 import { ElMessage } from "element-plus";
 import { UploadFileInfo } from "naive-ui";
 import { useUserStore } from "@/store/userStore";
-import CutomZipModal from "@/components/CustomZipModal.vue";
 import CustomZipModal from "@/components/CustomZipModal.vue";
 
 const userStore = useUserStore();
