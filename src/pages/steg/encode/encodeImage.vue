@@ -168,13 +168,13 @@ onBeforeUnmount(() => {
       </template>
     </a-page-header>
     <n-alert title="" type="info">
-      上传图片前建议用<a-link
+      上传图片>2M建议用<a-link
         href="https://tinypng.com/"
         status="warning"
         target="_blank"
         icon
         >图片压缩服务</a-link
-      >压缩图片体积，可大幅提升处理速度
+      >压缩图片体积，否则处理速度可能较慢
     </n-alert>
     <a-card class="step">
       <template #title>
