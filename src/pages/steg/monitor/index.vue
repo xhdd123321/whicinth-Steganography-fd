@@ -67,18 +67,14 @@ const getSysData = async () => {
     const res = await sysApi.getSysMonitor();
     if (res.code === 0) {
       sys_info.cpu_cores = res.data?.cpu_cores || 0;
-      sys_info.cpu_percent = Number(
-        ((res.data?.cpu_percent || 0) / 100).toFixed(2)
-      );
+      sys_info.cpu_percent = (res.data?.cpu_percent || 0) / 100;
       sys_info.mem_total = Number(
         ((res.data?.mem_total || 0) / (1 << 30)).toFixed(1)
       );
       sys_info.mem_used = Number(
         ((res.data?.mem_used || 0) / (1 << 30)).toFixed(1)
       );
-      sys_info.mem_percent = Number(
-        ((res.data?.mem_percent || 0) / 100).toFixed(2)
-      );
+      sys_info.mem_percent = (res.data?.mem_percent || 0) / 100;
     } else {
       console.log("code: ", res.code);
       console.log("msg: ", res.message);
