@@ -43,6 +43,7 @@ declare module '@vue/runtime-core' {
     ElSubMenu: typeof import('element-plus/es')['ElSubMenu']
     NAlert: typeof import('naive-ui')['NAlert']
     NDivider: typeof import('naive-ui')['NDivider']
+    NGradientText: typeof import('naive-ui')['NGradientText']
     NSpin: typeof import('naive-ui')['NSpin']
     NSwitch: typeof import('naive-ui')['NSwitch']
     NUpload: typeof import('naive-ui')['NUpload']

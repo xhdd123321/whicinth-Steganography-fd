@@ -111,7 +111,7 @@ const qaData = [
         </div>
       </template>
     </a-page-header>
-    <a-avatar-group style="margin-bottom: 3vh" :size="20 + windowsWidth / 40">
+    <a-avatar-group style="margin-bottom: 1vh" :size="20 + windowsWidth / 40">
       <a-avatar :style="{ backgroundColor: 'rgb(var(--arcoblue-3))' }"
         >W</a-avatar
       >
@@ -137,6 +137,12 @@ const qaData = [
         >H</a-avatar
       >
     </a-avatar-group>
+    <n-gradient-text
+      type="info"
+      style="display: flex; justify-content: center; margin-bottom: 1vh"
+    >
+      语言永远都有弊端，永远表达不完一半
+    </n-gradient-text>
     <a-card>
       <div class="content-container">
         <a-divider :margin="10"><icon-star /></a-divider>

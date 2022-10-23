@@ -41,6 +41,7 @@ export default {
           component: () => import("@/pages/steg/encode/encodeImage.vue"),
           meta: {
             title: "加密-图片",
+            keepAlive: true,
           },
         },
         {
@@ -49,6 +50,7 @@ export default {
           component: () => import("@/pages/steg/encode/encodeDoc.vue"),
           meta: {
             title: "加密-文字",
+            keepAlive: true,
           },
         },
       ],
@@ -75,6 +77,7 @@ export default {
           component: () => import("@/pages/steg/decode/decodeImage.vue"),
           meta: {
             title: "解密-图片",
+            keepAlive: true,
           },
         },
         {
@@ -83,6 +86,7 @@ export default {
           component: () => import("@/pages/steg/decode/decodeDoc.vue"),
           meta: {
             title: "解密-文字",
+            keepAlive: true,
           },
         },
         {
@@ -91,6 +95,7 @@ export default {
           component: () => import("@/pages/steg/decode/decodeIntelligent.vue"),
           meta: {
             title: "解密-智能(BETA)",
+            keepAlive: true,
           },
         },
       ],
@@ -101,6 +106,7 @@ export default {
       component: () => import("@/pages/steg/drift/index.vue"),
       meta: {
         title: "风信",
+        keepAlive: true,
       },
     },
     {
