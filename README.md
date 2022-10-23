@@ -2,13 +2,12 @@
 
 [![OSCS Status](https://www.oscs1024.com/platform/badge/xhdd123321/whicinth-steganography-fd.svg?size=small)](https://www.oscs1024.com/project/xhdd123321/whicinth-steganography-fd?ref=badge_small)
 
-风信——语言永远都有弊端，永远表达不完一半
+> 风信——语言永远都有弊端，永远表达不完一半
 
 - 这里是 whicinth 前端源码
 - 基于 Vue3.0 全家桶（Vue 3 + TypeScript + Vite）
 - 配套[后端](https://github.com/xhdd123321/whicinth-Steganography-bd)戳这里
-
-> 开发文档：[Re：从零搭建 Vue3 轻量级开发脚手架 | 逐暗的小站 (zhu-an.cn)](https://www.zhu-an.cn/todo/Re：从零搭建Vue3轻量级开发脚手架/)
+- 开发文档：[Re：从零搭建 Vue3 轻量级开发脚手架 | 逐暗的小站 (zhu-an.cn)](https://www.zhu-an.cn/todo/Re：从零搭建Vue3轻量级开发脚手架/)
 
 ## 简介
 
