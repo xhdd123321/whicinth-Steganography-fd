@@ -2,6 +2,9 @@ export default {
   path: "/steg",
   name: "steg",
   component: () => import("@/pages/steg/index.vue"),
+  meta: {
+    keepAlive: true,
+  },
   children: [
     {
       path: "",
@@ -61,6 +64,7 @@ export default {
       component: () => import("@/pages/steg/decode/index.vue"),
       meta: {
         title: "解密",
+        keepAlive: true,
       },
       children: [
         {
@@ -115,6 +119,7 @@ export default {
       component: () => import("@/pages/steg/monitor/index.vue"),
       meta: {
         title: "监控",
+        keepAlive: false,
       },
     },
   ],

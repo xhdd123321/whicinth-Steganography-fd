@@ -25,7 +25,21 @@ onBeforeMount(() => {
   <div class="common-layout">
     <a-layout>
       <a-layout-header><CustomHeader /></a-layout-header>
-      <a-layout-content><router-view /></a-layout-content>
+      <a-layout-content>
+        <router-view v-slot="{ Component }">
+          <keep-alive>
+            <component
+              :is="Component"
+              :key="$route.name"
+              v-if="$route.meta.keepAlive"
+            ></component>
+          </keep-alive>
+          <component
+            :is="Component"
+            :key="$route.name"
+            v-if="!$route.meta.keepAlive"
+          ></component> </router-view
+      ></a-layout-content>
       <a-layout-footer><CustomFooter /></a-layout-footer>
     </a-layout>
   </div>

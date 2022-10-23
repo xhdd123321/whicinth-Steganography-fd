@@ -5,11 +5,7 @@
 
 <template>
   <a-config-provider>
-    <router-view v-slot="{ Component }">
-      <keep-alive>
-        <component :is="Component"></component>
-      </keep-alive>
-    </router-view>
+    <router-view />
   </a-config-provider>
 </template>
 
