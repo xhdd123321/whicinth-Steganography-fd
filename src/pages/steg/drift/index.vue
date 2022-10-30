@@ -71,17 +71,19 @@ onBeforeUnmount(() => {
       </template>
     </a-page-header>
     <div class="content-container">
-      <n-alert title="" type="info">
-        试试点击下面的按钮, 然后将收到的图片解密一下 (～￣▽￣)～
-      </n-alert>
       <a-card class="step">
-        <a-button type="primary" shape="round" @click="triggerButton"
-          >Whi-cinth</a-button
-        >
+        <a-space direction="vertical">
+          <a-button type="primary" shape="round" @click="triggerButton"
+            >Whi-cinth</a-button
+          >
+        </a-space>
       </a-card>
       <n-spin :show="!goCDReady" size="large">
         <a-card class="step">
-          <a-empty v-if="drift === ''" description=" " />
+          <a-empty
+            v-if="drift === ''"
+            description="随机获取一张信箱中的图片，可以保存下来解密看看里面藏了什么"
+          />
           <a-image v-else width="70%" class="result-image" :src="drift" />
         </a-card>
         <template #description>
